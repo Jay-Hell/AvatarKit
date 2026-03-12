@@ -21,7 +21,7 @@ AvatarKit is a dependency-free SwiftUI library for rendering customizable layere
 
 ### Core types
 
-- **`AvatarConfiguration`** — holds a `SkinTone` and a dictionary of `[LayerOrder: any AvatarLayer]` for equipped items. `defaultConfiguration()` returns medium skin, no equipped items.
+- **`AvatarConfiguration`** — holds a `SkinTone` and a dictionary of `[LayerOrder: any AvatarLayer]` for equipped items. `.defaultConfiguration` (static property) returns medium skin, no equipped items.
 - **`AvatarLayer`** (protocol) — custom layer contract: `itemID`, `layerOrder`, and `renderView() -> AnyView`. Implement this to create custom clothing/accessory layers.
 - **`LayerOrder`** (enum, `Int`, `Comparable`) — 9 rendering depths: `background(0)`, `body(10)`, `shoes(20)`, `bottom(30)`, `top(40)`, `accessory(50)`, `hair(60)`, `pet(70)`, `expression(80)`.
 - **`SkinTone`** (enum) — `light`, `medium`, `dark`, each mapped to specific RGB `Color` values.
@@ -34,7 +34,7 @@ AvatarKit is a dependency-free SwiftUI library for rendering customizable layere
 2. Renders the equipped item from `AvatarConfiguration.equippedItems` if present, otherwise falls back to the corresponding sub-layer in `AvatarBaseView`.
 3. Optionally applies a drop shadow.
 
-`AvatarBaseView` contains the complete default avatar as 9 nested SwiftUI sub-views (`BackgroundLayer`, `BodyLayer`, `HeadLayer`, `FaceLayer`, `HairLayer`, `TopLayer`, `BottomLayer`, `ShoesLayer`, `AccessoryLayer`/`PetLayer`), assembled in a `ZStack`.
+`AvatarBaseView` contains the complete default avatar as 9 nested SwiftUI sub-views assembled in a `ZStack`. Sub-views that style clothing/background take a `ColourPalette` parameter (`BackgroundLayer`, `HairLayer`, `TopLayer`, `BottomLayer`, `AccessoryLayer`). Body-related views take a `SkinTone` (`BodyLayer`, `HeadLayer`). `FaceLayer`, `ShoesLayer`, and `PetLayer` take no parameters. `AccessoryLayer` and `PetLayer` render as `EmptyView()` by default.
 
 ## Visual style rules (apply to ALL generated layers and items)
 
@@ -43,7 +43,7 @@ These rules are mandatory for every shape drawn in any avatar layer.
 ### Stroke
 Every shape must have an outline overlay:
 ```swift
-.overlay(shape.stroke(Color(hex: "#2A2A2A"), lineWidth: 2.5))
+.overlay(shape.stroke(ColourPalette.from(hex: "#2A2A2A"), lineWidth: 2.5))
 ```
 
 ### Colours

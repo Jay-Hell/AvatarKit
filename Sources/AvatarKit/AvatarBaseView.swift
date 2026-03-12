@@ -16,22 +16,73 @@ public struct BodyLayer: View {
     let skinTone: SkinTone
 
     public var body: some View {
-        // Torso
-        RoundedRectangle(cornerRadius: 16)
-            .fill(skinTone.color)
-            .frame(width: 70, height: 90)
-            .offset(y: 50)
+        ZStack {
+            Group {
+                // Left arm (behind torso)
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(skinTone.color)
+                    .frame(width: 20, height: 55)
+                    .rotationEffect(.degrees(-8))
+                    .offset(x: -52, y: -23)
 
-        // Arms
-        RoundedRectangle(cornerRadius: 8)
-            .fill(skinTone.color)
-            .frame(width: 20, height: 70)
-            .offset(x: -50, y: 50)
+                // Right arm (behind torso)
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(skinTone.color)
+                    .frame(width: 20, height: 55)
+                    .rotationEffect(.degrees(8))
+                    .offset(x: 52, y: -23)
 
-        RoundedRectangle(cornerRadius: 8)
-            .fill(skinTone.color)
-            .frame(width: 20, height: 70)
-            .offset(x: 50, y: 50)
+                // Left leg
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(skinTone.color)
+                    .frame(width: 28, height: 65)
+                    .offset(x: -16, y: 92)
+
+                // Right leg
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(skinTone.color)
+                    .frame(width: 28, height: 65)
+                    .offset(x: 16, y: 92)
+
+                // Neck
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(skinTone.color)
+                    .frame(width: 12, height: 10)
+                    .offset(y: -60)
+            }
+
+            Group {
+                // Torso (on top of arm/leg connections)
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(skinTone.color)
+                    .frame(width: 80, height: 75)
+                    .offset(y: -17)
+
+                // Left hand
+                Circle()
+                    .fill(skinTone.color)
+                    .frame(width: 18, height: 18)
+                    .offset(x: -56, y: 7)
+
+                // Right hand
+                Circle()
+                    .fill(skinTone.color)
+                    .frame(width: 18, height: 18)
+                    .offset(x: 56, y: 7)
+
+                // Left foot
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(skinTone.color)
+                    .frame(width: 34, height: 18)
+                    .offset(x: -20, y: 129)
+
+                // Right foot
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(skinTone.color)
+                    .frame(width: 34, height: 18)
+                    .offset(x: 20, y: 129)
+            }
+        }
     }
 }
 
@@ -39,65 +90,17 @@ public struct HeadLayer: View {
     let skinTone: SkinTone
 
     public var body: some View {
-        // Neck
-        RoundedRectangle(cornerRadius: 4)
-            .fill(skinTone.color)
-            .frame(width: 20, height: 16)
-            .offset(y: -2)
-
         // Head
-        Ellipse()
-            .fill(skinTone.color)
-            .frame(width: 72, height: 80)
-            .offset(y: -50)
-
-        // Ears
         Circle()
             .fill(skinTone.color)
-            .frame(width: 16, height: 16)
-            .offset(x: -38, y: -48)
-
-        Circle()
-            .fill(skinTone.color)
-            .frame(width: 16, height: 16)
-            .offset(x: 38, y: -48)
+            .frame(width: 75, height: 75)
+            .offset(y: -100)
     }
 }
 
 public struct FaceLayer: View {
     public var body: some View {
-        // Eyes
-        Circle()
-            .fill(Color.white)
-            .frame(width: 18, height: 18)
-            .overlay(
-                Circle()
-                    .fill(Color(red: 0.25, green: 0.2, blue: 0.15))
-                    .frame(width: 10, height: 10)
-            )
-            .offset(x: -14, y: -54)
-
-        Circle()
-            .fill(Color.white)
-            .frame(width: 18, height: 18)
-            .overlay(
-                Circle()
-                    .fill(Color(red: 0.25, green: 0.2, blue: 0.15))
-                    .frame(width: 10, height: 10)
-            )
-            .offset(x: 14, y: -54)
-
-        // Nose
-        Ellipse()
-            .fill(Color(red: 0.7, green: 0.5, blue: 0.4).opacity(0.4))
-            .frame(width: 8, height: 6)
-            .offset(y: -42)
-
-        // Mouth
-        RoundedRectangle(cornerRadius: 4)
-            .fill(Color(red: 0.85, green: 0.45, blue: 0.45))
-            .frame(width: 20, height: 6)
-            .offset(y: -32)
+        EmptyView()
     }
 }
 
@@ -105,16 +108,7 @@ public struct HairLayer: View {
     let palette: ColourPalette
 
     public var body: some View {
-        // Short, gender-neutral hair
-        Ellipse()
-            .fill(palette.primary)
-            .frame(width: 78, height: 44)
-            .offset(y: -82)
-
-        RoundedRectangle(cornerRadius: 6)
-            .fill(palette.primary)
-            .frame(width: 74, height: 20)
-            .offset(y: -68)
+        EmptyView()
     }
 }
 
@@ -122,22 +116,7 @@ public struct TopLayer: View {
     let palette: ColourPalette
 
     public var body: some View {
-        // T-shirt
-        RoundedRectangle(cornerRadius: 14)
-            .fill(palette.accent)
-            .frame(width: 76, height: 70)
-            .offset(y: 42)
-
-        // Sleeves
-        RoundedRectangle(cornerRadius: 8)
-            .fill(palette.accent)
-            .frame(width: 24, height: 30)
-            .offset(x: -48, y: 32)
-
-        RoundedRectangle(cornerRadius: 8)
-            .fill(palette.accent)
-            .frame(width: 24, height: 30)
-            .offset(x: 48, y: 32)
+        EmptyView()
     }
 }
 
@@ -145,36 +124,13 @@ public struct BottomLayer: View {
     let palette: ColourPalette
 
     public var body: some View {
-        // Trousers
-        RoundedRectangle(cornerRadius: 4)
-            .fill(palette.primary.opacity(0.7))
-            .frame(width: 34, height: 60)
-            .offset(x: -18, y: 110)
-
-        RoundedRectangle(cornerRadius: 4)
-            .fill(palette.primary.opacity(0.7))
-            .frame(width: 34, height: 60)
-            .offset(x: 18, y: 110)
-
-        // Waistband
-        RoundedRectangle(cornerRadius: 4)
-            .fill(palette.primary.opacity(0.8))
-            .frame(width: 72, height: 12)
-            .offset(y: 82)
+        EmptyView()
     }
 }
 
 public struct ShoesLayer: View {
     public var body: some View {
-        RoundedRectangle(cornerRadius: 6)
-            .fill(Color(red: 0.3, green: 0.3, blue: 0.3))
-            .frame(width: 32, height: 14)
-            .offset(x: -18, y: 144)
-
-        RoundedRectangle(cornerRadius: 6)
-            .fill(Color(red: 0.3, green: 0.3, blue: 0.3))
-            .frame(width: 32, height: 14)
-            .offset(x: 18, y: 144)
+        EmptyView()
     }
 }
 
@@ -223,21 +179,27 @@ public struct AvatarBaseView: View {
 
 // MARK: - Preview
 
-#Preview("All Skin Tones") {
-    let palette = ColourPalette(
-        primary: ColourPalette.from(hex: "#3B2F2F"),
-        secondary: ColourPalette.from(hex: "#D6E4F0"),
-        accent: ColourPalette.from(hex: "#5B9BD5")
-    )
+struct AvatarBaseView_Previews: PreviewProvider {
+    static var previews: some View {
+        let palette = ColourPalette(
+            primary: ColourPalette.from(hex: "#3B2F2F"),
+            secondary: ColourPalette.from(hex: "#D6E4F0"),
+            accent: ColourPalette.from(hex: "#5B9BD5")
+        )
 
-    HStack(spacing: 20) {
-        ForEach(SkinTone.allCases, id: \.self) { tone in
-            VStack {
-                AvatarBaseView(skinTone: tone, palette: palette)
-                Text(tone.rawValue.capitalized)
-                    .font(.caption)
+        HStack(spacing: 20) {
+            ForEach(SkinTone.allCases, id: \.self) { tone in
+                VStack {
+                    AvatarCompositorView(
+                        configuration: AvatarConfiguration(skinTone: tone),
+                        palette: palette
+                    )
+                    Text(tone.rawValue.capitalized)
+                        .font(.caption)
+                }
             }
         }
+        .padding()
+        .previewDisplayName("All Skin Tones")
     }
-    .padding()
 }

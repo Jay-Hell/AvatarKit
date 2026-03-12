@@ -8,11 +8,11 @@ public enum SkinTone: String, CaseIterable, Sendable {
     public var color: Color {
         switch self {
         case .light:
-            return Color(red: 0.98, green: 0.87, blue: 0.75)
+            return ColourPalette.from(hex: "#FDDBB4")
         case .medium:
-            return Color(red: 0.82, green: 0.64, blue: 0.46)
+            return ColourPalette.from(hex: "#D4956A")
         case .dark:
-            return Color(red: 0.55, green: 0.36, blue: 0.24)
+            return ColourPalette.from(hex: "#8D5524")
         }
     }
 }
