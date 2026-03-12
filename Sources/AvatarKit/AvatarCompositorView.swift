@@ -22,14 +22,17 @@ public struct AvatarCompositorView: View {
     public var body: some View {
         ZStack {
             ForEach(LayerOrder.allCases, id: \.self) { order in
-                if let layer = configuration.equippedItems[order] {
-                    layer.renderView()
-                } else {
-                    defaultLayer(for: order)
+                Group {
+                    if let layer = configuration.equippedItems[order] {
+                        layer.renderView()
+                    } else {
+                        defaultLayer(for: order)
+                    }
                 }
+                .offset(y: order == .background ? 0 : 17)
             }
         }
-        .frame(width: 200, height: 350)
+        .frame(width: 150, height: 275)
         .clipped()
         .shadow(
             color: showShadow ? Color.black.opacity(0.25) : Color.clear,

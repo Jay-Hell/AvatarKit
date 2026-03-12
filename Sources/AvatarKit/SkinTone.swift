@@ -15,4 +15,5 @@ public enum SkinTone: String, CaseIterable, Sendable {
             return ColourPalette.from(hex: "#8D5524")
         }
     }
+
 }

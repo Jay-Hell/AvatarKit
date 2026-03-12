@@ -2,7 +2,7 @@
 
 A lightweight, dependency-free SwiftUI library for rendering customizable layered avatars.
 
-**Version:** 1.0.1 · **Platforms:** iOS 16+ · macOS 13+
+**Version:** 1.1.0 · **Platforms:** iOS 16+ · macOS 13+
 
 ---
 
@@ -16,7 +16,7 @@ Or add it directly to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-org/AvatarKit", from: "1.0.1")
+    .package(url: "https://github.com/your-org/AvatarKit", from: "1.1.0")
 ]
 ```
 
