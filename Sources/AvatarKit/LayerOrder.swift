@@ -14,4 +14,33 @@ public enum LayerOrder: Int, CaseIterable, Comparable, Sendable {
     public static func < (lhs: LayerOrder, rhs: LayerOrder) -> Bool {
         lhs.rawValue < rhs.rawValue
     }
+
+    public init?(string: String) {
+        switch string {
+        case "background": self = .background
+        case "body": self = .body
+        case "shoes": self = .shoes
+        case "bottom": self = .bottom
+        case "top": self = .top
+        case "accessory": self = .accessory
+        case "hair": self = .hair
+        case "pet": self = .pet
+        case "expression": self = .expression
+        default: return nil
+        }
+    }
+
+    public var name: String {
+        switch self {
+        case .background: "background"
+        case .body: "body"
+        case .shoes: "shoes"
+        case .bottom: "bottom"
+        case .top: "top"
+        case .accessory: "accessory"
+        case .hair: "hair"
+        case .pet: "pet"
+        case .expression: "expression"
+        }
+    }
 }

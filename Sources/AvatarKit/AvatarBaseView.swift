@@ -2,12 +2,12 @@ import SwiftUI
 
 // MARK: - Shapes
 
-struct TaperedRect: Shape {
-    var topWidth: CGFloat
-    var bottomWidth: CGFloat
-    var cornerRadius: CGFloat
+public struct TaperedRect: Shape {
+    public var topWidth: CGFloat
+    public var bottomWidth: CGFloat
+    public var cornerRadius: CGFloat
 
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let midX = rect.midX
         let tl = CGPoint(x: midX - topWidth / 2, y: rect.minY)
         let tr = CGPoint(x: midX + topWidth / 2, y: rect.minY)
