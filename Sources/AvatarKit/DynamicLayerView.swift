@@ -116,3 +116,140 @@ struct DynamicShapeView: View {
         }
     }
 }
+
+// MARK: - Preview
+
+/// JSON matching the default TopLayer: two straps + TaperedRect torso
+private let previewTopJSON = """
+{
+    "schemaVersion": 1,
+    "itemId": "preview-default-top",
+    "layerOrder": "top",
+    "shapes": [
+        {
+            "type": "roundedRectangle",
+            "width": 12, "height": 10, "cornerRadius": 4,
+            "fill": { "hex": "#DDDDDD" },
+            "offsetX": -18, "offsetY": -36
+        },
+        {
+            "type": "roundedRectangle",
+            "width": 12, "height": 10, "cornerRadius": 4,
+            "fill": { "hex": "#DDDDDD" },
+            "offsetX": 18, "offsetY": -36
+        },
+        {
+            "type": "taperedRect",
+            "topWidth": 54, "bottomWidth": 65, "cornerRadius": 9,
+            "width": 65, "height": 57,
+            "fill": { "hex": "#DDDDDD" },
+            "offsetY": -8
+        }
+    ]
+}
+"""
+
+/// JSON matching the default BottomLayer: two leg rects (rotated) + waistband
+private let previewBottomJSON = """
+{
+    "schemaVersion": 1,
+    "itemId": "preview-default-bottom",
+    "layerOrder": "bottom",
+    "shapes": [
+        {
+            "type": "roundedRectangle",
+            "width": 30, "height": 28, "cornerRadius": 4,
+            "fill": { "hex": "#8A8A8A" },
+            "rotation": 8.5,
+            "offsetX": -16, "offsetY": 42
+        },
+        {
+            "type": "roundedRectangle",
+            "width": 30, "height": 28, "cornerRadius": 4,
+            "fill": { "hex": "#8A8A8A" },
+            "rotation": -8.5,
+            "offsetX": 16, "offsetY": 42
+        },
+        {
+            "type": "roundedRectangle",
+            "width": 62, "height": 12, "cornerRadius": 4,
+            "fill": { "hex": "#8A8A8A" },
+            "offsetY": 28
+        }
+    ]
+}
+"""
+
+struct DynamicLayerView_Previews: PreviewProvider {
+    static let palette = ColourPalette(
+        primary: ColourPalette.from(hex: "#3B2F2F"),
+        secondary: ColourPalette.from(hex: "#D6E4F0"),
+        accent: ColourPalette.from(hex: "#5B9BD5")
+    )
+
+    static var topDescriptor: ItemDescriptor {
+        try! JSONDecoder().decode(ItemDescriptor.self, from: Data(previewTopJSON.utf8))
+    }
+
+    static var bottomDescriptor: ItemDescriptor {
+        try! JSONDecoder().decode(ItemDescriptor.self, from: Data(previewBottomJSON.utf8))
+    }
+
+    static var previews: some View {
+        VStack(spacing: 24) {
+            Text("Left: Base Avatar  |  Right: JSON Renderer")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+
+            HStack(spacing: 20) {
+                // Base avatar (built-in layers)
+                VStack {
+                    AvatarCompositorView(
+                        configuration: .defaultConfiguration,
+                        palette: palette
+                    )
+                    Text("Built-in")
+                        .font(.caption)
+                }
+
+                // JSON-rendered top + bottom overlaid on the base body
+                VStack {
+                    ZStack {
+                        // Background
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(palette.secondary)
+                            .frame(width: 150, height: 275)
+
+                        Group {
+                            // Base body (skin)
+                            BodyLayer(skinTone: .medium)
+                            // JSON-rendered bottom
+                            DynamicLayerView(
+                                descriptor: bottomDescriptor,
+                                palette: palette,
+                                skinTone: .medium
+                            )
+                            // JSON-rendered top
+                            DynamicLayerView(
+                                descriptor: topDescriptor,
+                                palette: palette,
+                                skinTone: .medium
+                            )
+                            // Head + face on top
+                            HeadLayer(skinTone: .medium)
+                            FaceLayer()
+                        }
+                        .offset(y: 17)
+                    }
+                    .frame(width: 150, height: 275)
+                    .clipped()
+
+                    Text("JSON Rendered")
+                        .font(.caption)
+                }
+            }
+        }
+        .padding()
+        .previewDisplayName("DynamicLayerView Comparison")
+    }
+}
