@@ -200,18 +200,6 @@ public struct TopLayer: View {
     let palette: ColourPalette
 
     public var body: some View {
-        // Left strap
-        RoundedRectangle(cornerRadius: 4)
-            .fill(ColourPalette.from(hex: "#DDDDDD"))
-            .frame(width: 12, height: 10)
-            .offset(x: -18, y: -36)
-
-        // Right strap
-        RoundedRectangle(cornerRadius: 4)
-            .fill(ColourPalette.from(hex: "#DDDDDD"))
-            .frame(width: 12, height: 10)
-            .offset(x: 18, y: -36)
-
         // Main body
         TaperedRect(topWidth: 54, bottomWidth: 65, cornerRadius: 9)
             .fill(ColourPalette.from(hex: "#DDDDDD"))

@@ -119,25 +119,13 @@ struct DynamicShapeView: View {
 
 // MARK: - Preview
 
-/// JSON matching the default TopLayer: two straps + TaperedRect torso
+/// JSON matching the default TopLayer: TaperedRect torso only
 private let previewTopJSON = """
 {
     "schemaVersion": 1,
     "itemId": "preview-default-top",
     "layerOrder": "top",
     "shapes": [
-        {
-            "type": "roundedRectangle",
-            "width": 12, "height": 10, "cornerRadius": 4,
-            "fill": { "hex": "#DDDDDD" },
-            "offsetX": -18, "offsetY": -36
-        },
-        {
-            "type": "roundedRectangle",
-            "width": 12, "height": 10, "cornerRadius": 4,
-            "fill": { "hex": "#DDDDDD" },
-            "offsetX": 18, "offsetY": -36
-        },
         {
             "type": "taperedRect",
             "topWidth": 54, "bottomWidth": 65, "cornerRadius": 9,
