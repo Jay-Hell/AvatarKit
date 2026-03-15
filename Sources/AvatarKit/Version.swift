@@ -1,3 +1,3 @@
 public enum AvatarKitVersion {
-    public static let version = "1.3.1"
+    public static let version = "1.3.2"
 }

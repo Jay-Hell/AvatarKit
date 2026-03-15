@@ -32,8 +32,12 @@ public struct BackgroundLayer: View {
 
     public var body: some View {
         RoundedRectangle(cornerRadius: 20)
-            .fill(palette.secondary)
+            .fill(Color.clear)
             .frame(width: 150, height: 275)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(ColourPalette.from(hex: "#2A2A2A"), lineWidth: 2.5)
+            )
     }
 }
 
