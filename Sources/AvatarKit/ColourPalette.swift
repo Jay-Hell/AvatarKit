@@ -4,11 +4,13 @@ public struct ColourPalette: Sendable {
     public var primary: Color
     public var secondary: Color
     public var accent: Color
+    public var background: Color
 
-    public init(primary: Color, secondary: Color, accent: Color) {
+    public init(primary: Color, secondary: Color, accent: Color, background: Color = Color(white: 0.92)) {
         self.primary = primary
         self.secondary = secondary
         self.accent = accent
+        self.background = background
     }
 
     public static func from(hex: String) -> Color {
