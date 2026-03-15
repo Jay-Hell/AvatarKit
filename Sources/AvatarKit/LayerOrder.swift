@@ -6,8 +6,8 @@ public enum LayerOrder: Int, CaseIterable, Comparable, Sendable {
     case shoes = 20
     case bottom = 30
     case top = 40
+    case hair = 45
     case accessory = 50
-    case hair = 60
     case pet = 70
     case expression = 80
 

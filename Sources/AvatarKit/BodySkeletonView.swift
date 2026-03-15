@@ -25,6 +25,8 @@ public struct BodySkeletonView: View {
                     bottomSkeleton
                 case "shoes":
                     shoesSkeleton
+                case "hair":
+                    hairSkeleton
                 case "accessory":
                     accessorySkeleton
                 case "expression":
@@ -114,6 +116,30 @@ public struct BodySkeletonView: View {
         }
     }
 
+    // MARK: - Hair: head, left ear, right ear
+
+    private var hairSkeleton: some View {
+        ZStack {
+            // Left ear — Circle frame 22×22, offset x:-34.5 y:-75
+            Circle()
+                .fill(fill)
+                .frame(width: 22, height: 22)
+                .offset(x: -34.5, y: -75)
+
+            // Right ear — Circle frame 22×22, offset x:34.5 y:-75
+            Circle()
+                .fill(fill)
+                .frame(width: 22, height: 22)
+                .offset(x: 34.5, y: -75)
+
+            // Head — Circle frame 75×75, offset y:-78
+            Circle()
+                .fill(fill)
+                .frame(width: 75, height: 75)
+                .offset(y: -78)
+        }
+    }
+
     // MARK: - Accessory: head, left ear, right ear
 
     private var accessorySkeleton: some View {
@@ -152,7 +178,7 @@ public struct BodySkeletonView: View {
 // MARK: - Preview
 
 struct BodySkeletonView_Previews: PreviewProvider {
-    static let categories = ["top", "bottom", "shoes", "accessory", "expression", "background", "pet"]
+    static let categories = ["top", "bottom", "shoes", "hair", "accessory", "expression", "background", "pet"]
 
     static var previews: some View {
         ScrollView(.horizontal) {
